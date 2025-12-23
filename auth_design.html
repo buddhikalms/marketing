@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome - Marketing System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+      /* Custom utilities for floating labels */
+      .floating-input:placeholder-shown ~ label {
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1rem;
+        color: #6b7280; /* gray-500 */
+      }
+      .floating-input:focus ~ label,
+      .floating-input:not(:placeholder-shown) ~ label {
+        top: 0;
+        transform: translateY(-50%);
+        font-size: 0.875rem;
+        background-color: white;
+        padding: 0 0.25rem;
+        color: #4f46e5; /* indigo-600 */
+      }
+      /* Error State Class */
+      .input-error {
+        border-color: #ef4444 !important;
+      }
+      .input-error:focus {
+        --tw-ring-color: #fca5a5 !important;
+      }
+      .input-error ~ label {
+        color: #ef4444 !important;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 font-sans">
+    <div class="min-h-screen flex flex-col lg:flex-row">
+      <!-- Left Side: Branding (Hidden on Mobile) -->
+      <div
+        class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-indigo-600 to-violet-700 relative overflow-hidden items-center justify-center p-12"
+      >
+        <!-- Abstract Shapes -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
+          <div
+            class="absolute -top-24 -left-24 w-96 h-96 bg-white opacity-10 rounded-full blur-3xl"
+          ></div>
+          <div
+            class="absolute bottom-0 right-0 w-80 h-80 bg-purple-500 opacity-20 rounded-full blur-3xl"
+          ></div>
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-10 text-center text-white max-w-lg">
+          <div class="mb-8 flex justify-center">
+            <div class="p-3 bg-white/10 rounded-xl backdrop-blur-sm">
+              <i data-lucide="trending-up" class="w-12 h-12 text-white"></i>
+            </div>
+          </div>
+          <h2 class="text-4xl font-bold mb-6 leading-tight">
+            "Growth is never by mere chance; it is the result of forces working
+            together."
+          </h2>
+          <p class="text-indigo-200 text-lg font-medium">- James Cash Penney</p>
+        </div>
+      </div>
+
+      <!-- Right Side: Auth Forms -->
+      <div class="w-full lg:w-1/2 flex items-center justify-center p-6 lg:p-12">
+        <div
+          class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 border border-gray-100"
+        >
+          <!-- Login Form -->
+          <div
+            id="login-container"
+            class="block transition-all duration-500 ease-in-out"
+          >
+            <div class="text-center mb-8">
+              <h1 class="text-2xl font-bold text-gray-900">Welcome Back</h1>
+              <p class="text-gray-500 mt-2">
+                Enter your credentials to access your account.
+              </p>
+            </div>
+
+            <form class="space-y-6">
+              <div class="relative">
+                <input
+                  type="email"
+                  id="login-email"
+                  class="floating-input peer w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent placeholder-transparent transition-all"
+                  placeholder="Email"
+                  required
+                />
+                <label
+                  for="login-email"
+                  class="absolute left-3 transition-all duration-200 pointer-events-none"
+                  >Email Address</label
+                >
+                <i
+                  data-lucide="mail"
+                  class="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
+                ></i>
+              </div>
+
+              <div class="relative">
+                <input
+                  type="password"
+                  id="login-pass"
+                  class="floating-input peer w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent placeholder-transparent transition-all"
+                  placeholder="Password"
+                  required
+                />
+                <label
+                  for="login-pass"
+                  class="absolute left-3 transition-all duration-200 pointer-events-none"
+                  >Password</label
+                >
+                <button
+                  type="button"
+                  onclick="togglePassword('login-pass', 'login-eye')"
+                  class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none"
+                >
+                  <i id="login-eye" data-lucide="eye" class="w-5 h-5"></i>
+                </button>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <label class="flex items-center space-x-2 cursor-pointer group">
+                  <input
+                    type="checkbox"
+                    class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                  />
+                  <span
+                    class="text-sm text-gray-600 group-hover:text-gray-800 transition-colors"
+                    >Remember me</span
+                  >
+                </label>
+                <a
+                  href="#"
+                  class="text-sm font-medium text-indigo-600 hover:text-indigo-500 hover:underline"
+                  >Forgot Password?</a
+                >
+              </div>
+
+              <button
+                type="submit"
+                class="w-full bg-indigo-600 text-white font-bold py-3 rounded-lg hover:bg-indigo-700 transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg hover:shadow-indigo-500/30 focus:ring-4 focus:ring-indigo-500/50"
+              >
+                Sign In
+              </button>
+            </form>
+
+            <p class="mt-8 text-center text-gray-600">
+              Don't have an account?
+              <button
+                onclick="toggleForms()"
+                class="text-indigo-600 font-bold hover:underline focus:outline-none ml-1"
+              >
+                Create Account
+              </button>
+            </p>
+          </div>
+
+          <!-- Registration Form (Hidden) -->
+          <div
+            id="register-container"
+            class="hidden transition-all duration-500 ease-in-out"
+          >
+            <div class="text-center mb-8">
+              <h1 class="text-2xl font-bold text-gray-900">Create Account</h1>
+              <p class="text-gray-500 mt-2">
+                Start your journey with us today.
+              </p>
+            </div>
+
+            <form class="space-y-5">
+              <div class="relative">
+                <input
+                  type="text"
+                  id="reg-name"
+                  class="floating-input peer w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent placeholder-transparent transition-all"
+                  placeholder="Full Name"
+                  required
+                />
+                <label
+                  for="reg-name"
+                  class="absolute left-3 transition-all duration-200 pointer-events-none"
+                  >Full Name</label
+                >
+                <i
+                  data-lucide="user"
+                  class="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
+                ></i>
+              </div>
+
+              <div class="relative">
+                <input
+                  type="email"
+                  id="reg-email"
+                  class="floating-input peer w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent placeholder-transparent transition-all"
+                  placeholder="Email"
+                  required
+                />
+                <label
+                  for="reg-email"
+                  class="absolute left-3 transition-all duration-200 pointer-events-none"
+                  >Email Address</label
+                >
+                <i
+                  data-lucide="mail"
+                  class="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
+                ></i>
+              </div>
+
+              <div class="relative">
+                <input
+                  type="password"
+                  id="reg-pass"
+                  class="floating-input peer w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent placeholder-transparent transition-all"
+                  placeholder="Password"
+                  required
+                />
+                <label
+                  for="reg-pass"
+                  class="absolute left-3 transition-all duration-200 pointer-events-none"
+                  >Password</label
+                >
+                <button
+                  type="button"
+                  onclick="togglePassword('reg-pass', 'reg-eye')"
+                  class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none"
+                >
+                  <i id="reg-eye" data-lucide="eye" class="w-5 h-5"></i>
+                </button>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full bg-indigo-600 text-white font-bold py-3 rounded-lg hover:bg-indigo-700 transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg hover:shadow-indigo-500/30 focus:ring-4 focus:ring-indigo-500/50"
+              >
+                Sign Up
+              </button>
+            </form>
+
+            <p class="mt-8 text-center text-gray-600">
+              Already have an account?
+              <button
+                onclick="toggleForms()"
+                class="text-indigo-600 font-bold hover:underline focus:outline-none ml-1"
+              >
+                Sign In
+              </button>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      lucide.createIcons();
+
+      function toggleForms() {
+        const login = document.getElementById("login-container");
+        const register = document.getElementById("register-container");
+        login.classList.toggle("hidden");
+        register.classList.toggle("hidden");
+      }
+
+      function togglePassword(inputId, iconId) {
+        const input = document.getElementById(inputId);
+        input.type = input.type === "password" ? "text" : "password";
+        // Note: In a real React/Vue app, we'd swap the icon component.
+        // For vanilla JS + Lucide, re-rendering or swapping SVG is needed.
+      }
+    </script>
+  </body>
+</html>

@@ -52,7 +52,7 @@ if (!is_in_downline($conn, $viewing_user_id, $user_to_view_id)) {
 
 $stmt = $conn->prepare("
     SELECT 
-        u.username, u.full_name, u.email, u.nic_number, u.gender, u.district, u.city, u.address, u.contact_number, u.created_at,
+        u.username, u.full_name, u.email, u.nic_number, u.gender, u.district, u.city, u.address, u.contact_number, u.created_at, u.points, u.wallet_balance,
         COALESCE((SELECT SUM(amount) FROM sales WHERE user_id = u.id), 0) as total_sales,
         COALESCE((SELECT COUNT(*) FROM sales WHERE user_id = u.id), 0) as sales_count,
         COALESCE((SELECT SUM(amount) FROM commissions WHERE user_id = u.id), 0) as total_commissions

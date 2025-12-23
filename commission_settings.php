@@ -45,71 +45,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 // Fetch all commission levels
 $levels_result = $conn->query("SELECT * FROM commission_levels ORDER BY level ASC");
+$levels = [];
+if ($levels_result) {
+    while ($row = $levels_result->fetch_assoc()) {
+        $levels[] = $row;
+    }
+}
 
 include 'templates/header.php';
-?>
-
-<?php echo $message; ?>
-
-<div class="row">
-    <!-- Form to add/update a level -->
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-header">Add / Edit Commission Level</div>
-            <div class="card-body">
-                <form method="POST">
-                    <div class="mb-3">
-                        <label for="level" class="form-label">Hierarchy Level</label>
-                        <input type="number" class="form-control" id="level" name="level" min="1" required>
-                        <div class="form-text">e.g., 1 for direct referrals, 2 for their referrals, etc.</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="rate" class="form-label">Commission Rate (%)</label>
-                        <input type="number" step="0.01" class="form-control" id="rate" name="rate" min="0" required>
-                    </div>
-                    <button type="submit" name="add_level" class="btn btn-primary">Save Level</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Table of existing levels -->
-    <div class="col-md-8">
-        <div class="card">
-            <div class="card-header">Existing Commission Levels</div>
-            <div class="table-responsive">
-                <table class="table table-striped mb-0">
-                    <thead>
-                        <tr>
-                            <th>Level</th>
-                            <th>Rate (%)</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php if ($levels_result->num_rows > 0) : ?>
-                            <?php while ($row = $levels_result->fetch_assoc()) : ?>
-                                <tr>
-                                    <td>Level <?php echo htmlspecialchars($row['level']); ?></td>
-                                    <td><?php echo htmlspecialchars($row['rate']); ?>%</td>
-                                    <td>
-                                        <form method="POST" onsubmit="return confirm('Are you sure you want to delete this level?');" style="display:inline;">
-                                            <input type="hidden" name="level_id" value="<?php echo $row['id']; ?>">
-                                            <button type="submit" name="delete_level" class="btn btn-danger btn-sm">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            <?php endwhile; ?>
-                        <?php else : ?>
-                            <tr>
-                                <td colspan="3" class="text-center">No commission levels defined yet.</td>
-                            </tr>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-
-<?php include 'templates/footer.php'; ?>
+include 'views/commission_settings_view.php';
+include 'templates/footer.php';
